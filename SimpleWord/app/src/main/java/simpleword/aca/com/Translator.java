@@ -1,4 +1,7 @@
 package simpleword.aca.com;
+import android.app.Activity;
+import android.os.Bundle;
+import android.os.Message;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -8,6 +11,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.logging.Handler;
 
 
 public class Translator
@@ -15,7 +19,7 @@ public class Translator
 
     public final int KO_TO_EN = 0;
     public final int EN_TO_KO = 1;
-
+    public final String error = "error";
 
     public String translate(String text, final int request, final String clientId, final String clientSecret)
     {
@@ -69,12 +73,15 @@ public class Translator
             Log.v("error_", "error2");
             e.printStackTrace();
             Log.v("error_", e.toString());
-            Log.v("error_", e.getMessage());
+
         }
 
-            Log.v("error", "null returned");
-            return null;
+            Log.v("error_", "null returned");
+            return error;
     }
+
+
+
 
 }
 
