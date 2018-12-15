@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity
     private static final String clientSecret = "vLR36Xfcxr";
     TextView tv_transResult;
     Translator tl;
+    private String translatedText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -26,33 +27,10 @@ public class MainActivity extends AppCompatActivity
         tv_transResult = findViewById(R.id.text1);
         tl = new Translator();
 
-        new Thread()
-        {
-            public void run()
-            {
-                try
-                {
-                    String translated = tl.translate("만나서 반갑습니다.", tl.KO_TO_EN, clientId, clientSecret);
-                    JSONObject jsonObject = new JSONObject(translated).getJSONObject("message").getJSONObject("result");
-                    String translatedFinal = jsonObject.getString("translatedText");
-                    Log.v("error_", "-----code = " + translatedFinal);
-                }
-                catch(Exception e)
-                {
-                    Log.v("error_", "ERROR OCCUR");
-                    Log.v("error_", e.toString());
-                    e.printStackTrace();
-                }
-            }
-
-
-        }.start();
-
-
+        translatedText = tl.Translate("고구마", tl.KO_TO_EN);
+        tv_transResult.setText(translatedText);
 
     }
-
-
 
 
 
