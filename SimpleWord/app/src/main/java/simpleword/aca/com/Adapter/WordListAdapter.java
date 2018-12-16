@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import simpleword.aca.com.Db.DBHelper;
+import simpleword.aca.com.Fragment.MainFragment;
 import simpleword.aca.com.R;
 import simpleword.aca.com.Word;
 
@@ -23,16 +25,19 @@ public class WordListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     Drawable fillStarImage;
     Drawable emptyStarImage;
 
+
     private ArrayList<Word> wordArrayList;
+    private DBHelper dbHelper;
 
-
-    public WordListAdapter(ArrayList<Word> wordArrayList, Context context)
+    public WordListAdapter(ArrayList<Word> wordArrayList, Context context, DBHelper dbHelper)
     {
         this.wordArrayList = wordArrayList;
         fillStarImage = context.getResources().getDrawable(R.drawable.star_full, null);
         emptyStarImage = context.getResources().getDrawable(R.drawable.star_empty, null);
+        this.dbHelper = dbHelper;
 
     }
+
 
     @NonNull
     @Override
@@ -55,6 +60,13 @@ public class WordListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         holder.tvEnglish.setText(word.getEnglishStr());
         holder.checkBox.setChecked(word.isChecked());
 
+    }
+
+    public void addItem(Word word)
+    {
+        wordArrayList.add(word);
+
+        notifyDataSetChanged();
     }
 
     @Override

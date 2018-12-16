@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity
     private ViewPager mViewPager;
     private ViewPagerAdapter mPageAdapter;
     private TabLayout mTabLayout;
-    private DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -46,9 +45,6 @@ public class MainActivity extends AppCompatActivity
         mTabLayout.setupWithViewPager(mViewPager);
 
 
-        //DB
-        dbHelper = new DBHelper(MainActivity.this, "Word", null, 1);
-        dbHelper.testDB();
     }
 
     private void setupViewPager()
