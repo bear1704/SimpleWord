@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/word_checkbox"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:textSize="20sp"
+                android:id="@+id/tv_worditem_korean"
+                android:layout_weight="1"
+                android:text="한국어"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:textSize="20sp"
+                android:id="@+id/tv_worditem_english"
+                android:layout_weight="1"
+                android:text="English"
+                android:textColor="@color/black"/>
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/iv_item_importance1"
+            android:src="@drawable/star_empty"/>
+
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/iv_item_importance2"
+            android:src="@drawable/star_empty"/>
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/iv_item_importance3"
+            android:src="@drawable/star_empty"/>
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/iv_item_importance4"
+            android:src="@drawable/star_empty"/>
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:id="@+id/iv_item_importance5"
+            android:src="@drawable/star_empty"/>
+
+
+    </LinearLayout>
+</LinearLayout>

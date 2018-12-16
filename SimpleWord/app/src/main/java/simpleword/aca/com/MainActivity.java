@@ -15,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import simpleword.aca.com.Adapter.ViewPagerAdapter;
+import simpleword.aca.com.Db.DBHelper;
 import simpleword.aca.com.Fragment.MainFragment;
 import simpleword.aca.com.Fragment.WordListFragment;
 import simpleword.aca.com.Fragment.WordTestFragment;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity
     private ViewPager mViewPager;
     private ViewPagerAdapter mPageAdapter;
     private TabLayout mTabLayout;
+    private DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -44,6 +46,9 @@ public class MainActivity extends AppCompatActivity
         mTabLayout.setupWithViewPager(mViewPager);
 
 
+        //DB
+        dbHelper = new DBHelper(MainActivity.this, "Word", null, 1);
+        dbHelper.testDB();
     }
 
     private void setupViewPager()
