@@ -51,6 +51,9 @@ public class WordListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
         fillStar(word, holder); //Word 객체에 있는 Star count 수 만큼 star를 채운다.
 
+        holder.tvKorean.setText(word.getKoreanStr());
+        holder.tvEnglish.setText(word.getEnglishStr());
+        holder.checkBox.setChecked(word.isChecked());
 
     }
 
