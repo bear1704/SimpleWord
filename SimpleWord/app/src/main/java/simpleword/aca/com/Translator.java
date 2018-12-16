@@ -22,11 +22,11 @@ public class Translator
     public final int KO_TO_EN = 0;
     public final int EN_TO_KO = 1;
     public final String error = "error";
-    private static final String clientId = "eWBogsUUe9GhsNs7747O";
-    private static final String clientSecret = "vLR36Xfcxr";
+    public static final String clientId = "eWBogsUUe9GhsNs7747O";
+    public static final String clientSecret = "vLR36Xfcxr";
     TranslateThread tt;
 
-    public String translate(String text, final int request, final String clientId, final String clientSecret)
+    private String translate(String text, final int request)
     {
         try
         {
@@ -106,14 +106,14 @@ public class Translator
             {
                 if(type == KO_TO_EN)
                 {
-                    translated = translate(str, KO_TO_EN, clientId, clientSecret); //API 요청, 번역
+                    translated = translate(str, KO_TO_EN); //API 요청, 번역
                     JSONObject jsonObject = new JSONObject(translated).getJSONObject("message").getJSONObject("result"); //JSON String 형태로 들어오므로 원하는 값만 추출
                     stringResult = jsonObject.getString("translatedText");
                     Log.v("result_", "-----code = " + stringResult);
                 }
                 else if(type == EN_TO_KO)
                 {
-                    translated = translate(str, EN_TO_KO, clientId, clientSecret); //API 요청, 번역
+                    translated = translate(str, EN_TO_KO); //API 요청, 번역
                     JSONObject jsonObject = new JSONObject(translated).getJSONObject("message").getJSONObject("result"); //JSON String 형태로 들어오므로 원하는 값만 추출
                     stringResult = jsonObject.getString("translatedText");
                     Log.v("result_", "-----code = " + stringResult);

@@ -34,7 +34,7 @@ public class WordListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         this.wordArrayList = wordArrayList;
         fillStarImage = context.getResources().getDrawable(R.drawable.star_full, null);
         emptyStarImage = context.getResources().getDrawable(R.drawable.star_empty, null);
-        dbHelper = DBHelper.getInstance(context, "Word", null, 1);
+        dbHelper = DBHelper.getInstance(context.getApplicationContext());
 
     }
 

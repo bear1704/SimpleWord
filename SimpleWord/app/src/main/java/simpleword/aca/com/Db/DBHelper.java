@@ -16,18 +16,25 @@ public class DBHelper extends SQLiteOpenHelper
     private Context context;
     public static DBHelper helper = null;
 
-    public DBHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version)
+    public DBHelper(final Context context)
     {
-        super(context, name, factory, version);
+        super(context, "Word", null, 1);
         this.context = context;
     }
 
-    public static DBHelper getInstance(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) //싱글톤
+    public static DBHelper getInstance(Context context) //싱글톤
     {
         if(helper == null)
         {
-            helper = new DBHelper(context, name, factory, version);
+            synchronized (DBHelper.class)
+            {
+                if(helper == null)
+                {
+                    helper = new DBHelper(context);
+                }
+            }
         }
+
 
         return helper;
     }
