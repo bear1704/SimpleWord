@@ -29,12 +29,12 @@ public class WordListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private ArrayList<Word> wordArrayList;
     private DBHelper dbHelper;
 
-    public WordListAdapter(ArrayList<Word> wordArrayList, Context context, DBHelper dbHelper)
+    public WordListAdapter(ArrayList<Word> wordArrayList, Context context)
     {
         this.wordArrayList = wordArrayList;
         fillStarImage = context.getResources().getDrawable(R.drawable.star_full, null);
         emptyStarImage = context.getResources().getDrawable(R.drawable.star_empty, null);
-        this.dbHelper = dbHelper;
+        dbHelper = DBHelper.getInstance(context, "Word", null, 1);
 
     }
 
@@ -65,8 +65,13 @@ public class WordListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void addItem(Word word)
     {
         wordArrayList.add(word);
-
+        dbHelper.addWord(word);
         notifyDataSetChanged();
+    }
+
+    public void removeItem(Word word)
+    {
+
     }
 
     @Override

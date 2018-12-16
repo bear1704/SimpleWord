@@ -35,15 +35,17 @@ public class MainFragment extends Fragment
 
 
 
-        dbHelper = new DBHelper(this.getActivity(), "Word", null, 1);
+        //dbHelper = new DBHelper(this.getActivity(), "Word", null, 1);
+        dbHelper = DBHelper.getInstance(this.getActivity(), "Word", null, 1);
 
+        dbHelper.clearWord();
         dbHelper.addWord(new Word("한국", "korea", 2));
         dbHelper.addWord(new Word("중국", "china", 1));
 
 
         wordArrayList = dbHelper.getAllWordsData();
 
-        WordListAdapter wordListAdapter = new WordListAdapter(wordArrayList, this.getContext(), dbHelper);
+        WordListAdapter wordListAdapter = new WordListAdapter(wordArrayList, this.getContext());
 
         mRecyclerView.setAdapter(wordListAdapter);
 

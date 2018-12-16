@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp">
+    android:padding="1dp">
 
 
     <LinearLayout
@@ -49,36 +49,36 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="25dp">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_height="15dp"
             android:id="@+id/iv_item_importance1"
             android:src="@drawable/star_empty"/>
 
 
         <ImageView
             android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_height="15dp"
             android:id="@+id/iv_item_importance2"
             android:src="@drawable/star_empty"/>
 
         <ImageView
             android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_height="15dp"
             android:id="@+id/iv_item_importance3"
             android:src="@drawable/star_empty"/>
 
         <ImageView
             android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_height="15dp"
             android:id="@+id/iv_item_importance4"
             android:src="@drawable/star_empty"/>
 
         <ImageView
             android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_height="15dp"
             android:id="@+id/iv_item_importance5"
             android:src="@drawable/star_empty"/>
 
