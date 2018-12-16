@@ -64,8 +64,8 @@ public class WordListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     public void addItem(Word word)
     {
-        wordArrayList.add(word);
         dbHelper.addWord(word);
+        wordArrayList = dbHelper.getAllWordsData();
         notifyDataSetChanged();
     }
 

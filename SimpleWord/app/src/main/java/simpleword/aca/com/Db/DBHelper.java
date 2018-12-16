@@ -13,6 +13,12 @@ import simpleword.aca.com.Word;
 public class DBHelper extends SQLiteOpenHelper
 {
 
+    public final int MODE_ALPHABET = 0;
+    public final int MODE_IMPORTANCE = 1;
+    public final int MODE_DATE = 2;
+
+    int orderMode = 1;
+
     private Context context;
     public static DBHelper helper = null;
 
@@ -93,7 +99,11 @@ public class DBHelper extends SQLiteOpenHelper
         Word word = null;
 
         StringBuffer sb = new StringBuffer();
-        sb.append(" SELECT KOREAN, ENGLISH, STAR FROM WORDS ");
+
+        if(orderMode == 0)
+            sb.append(" SELECT KOREAN, ENGLISH, STAR FROM WORDS ORDER BY LOWER(ENGLISH) DESC");
+        else if(orderMode == 1)
+            sb.append(" SELECT KOREAN, ENGLISH, STAR FROM WORDS ORDER BY STAR DESC");
 
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(sb.toString(), null);

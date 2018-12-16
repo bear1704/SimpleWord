@@ -63,8 +63,6 @@ public class MainActivity extends AppCompatActivity
 
     TabLayout.OnTabSelectedListener tabSelectedListener = new TabLayout.OnTabSelectedListener()
     {
-
-
         @Override
         public void onTabSelected(TabLayout.Tab tab)
         {
