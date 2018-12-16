@@ -49,7 +49,6 @@ public class WordListFragment extends Fragment
         wordArrayList = dbHelper.getAllWordsData();
         wordListAdapter = new WordListAdapter(wordArrayList, this.getContext());
         mRecyclerView.setAdapter(wordListAdapter);
-        Log.v("error_", "두번째 selected");
     }
 
 }

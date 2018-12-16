@@ -176,7 +176,6 @@ public class MainFragment extends Fragment
         wordArrayList = dbHelper.getAllWordsData();
         wordListAdapter = new WordListAdapter(wordArrayList, this.getContext());
         mRecyclerView.setAdapter(wordListAdapter);
-        Log.v("error_", "첫번째 selected");
     }
 
     public boolean isKorean(String str)

@@ -31,6 +31,12 @@ public class MainActivity extends AppCompatActivity
     private ViewPagerAdapter mPageAdapter;
     private TabLayout mTabLayout;
 
+    MainFragment mainFragment;
+    WordListFragment wordListFragment;
+    WordTestFragment wordTestFragment;
+
+    boolean isStart = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -38,6 +44,10 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         //tv_transResult = findViewById(R.id.text1);
         tl = new Translator();
+
+        mainFragment = new MainFragment();
+        wordListFragment = new WordListFragment();
+        wordTestFragment = new WordTestFragment();
 
         mViewPager = findViewById(R.id.vp_main_viewpager);
         mTabLayout = (TabLayout) findViewById(R.id.tab_main_layout);
@@ -47,15 +57,34 @@ public class MainActivity extends AppCompatActivity
         setupViewPager();
         mTabLayout.setupWithViewPager(mViewPager);
 
+        isStart = true;
 
     }
 
     TabLayout.OnTabSelectedListener tabSelectedListener = new TabLayout.OnTabSelectedListener()
     {
+
+
         @Override
         public void onTabSelected(TabLayout.Tab tab)
         {
-            Log.v("error_", "스와이프!");
+                int position = tab.getPosition();
+
+                if(isStart)
+                {
+                    switch (position)
+                    {
+                        case 0:
+                            mainFragment.fragmentSelected();
+                            break;
+                        case 1:
+                            wordListFragment.fragmentSelected();
+                            break;
+                        case 2:
+                            break;
+
+                    }
+                }
         }
 
         @Override
@@ -74,9 +103,9 @@ public class MainActivity extends AppCompatActivity
     private void setupViewPager()
     {
         mPageAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        mPageAdapter.addFragment(new MainFragment(), "메인");
-        mPageAdapter.addFragment(new WordListFragment(), "목록");
-        mPageAdapter.addFragment(new WordTestFragment(), "테스트");
+        mPageAdapter.addFragment(mainFragment, "메인");
+        mPageAdapter.addFragment(wordListFragment, "목록");
+        mPageAdapter.addFragment(wordTestFragment, "테스트");
 
         mViewPager.setAdapter(mPageAdapter);
 
