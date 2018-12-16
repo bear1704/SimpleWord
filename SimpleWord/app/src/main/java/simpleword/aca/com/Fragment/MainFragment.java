@@ -7,6 +7,7 @@ import android.os.PatternMatcher;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,6 +40,7 @@ public class MainFragment extends Fragment
     Drawable emptyStarImage;
     int starCount = 1; //입력 전 선택한 별 카운트
     WordListAdapter wordListAdapter = null;
+    WordListAdapter wordListFragmentListAdapter = null;
 
     Button inputButton;
 
@@ -77,6 +79,7 @@ public class MainFragment extends Fragment
         wordArrayList = dbHelper.getAllWordsData();
 
         wordListAdapter = new WordListAdapter(wordArrayList, this.getContext());
+
 
         mRecyclerView.setAdapter(wordListAdapter);
 
@@ -165,6 +168,15 @@ public class MainFragment extends Fragment
             wordListAdapter.addItem(word);
             inputEditText.setText("");
         }
+    }
+
+    public void fragmentSelected()
+    {
+        super.onResume();
+        wordArrayList = dbHelper.getAllWordsData();
+        wordListAdapter = new WordListAdapter(wordArrayList, this.getContext());
+        mRecyclerView.setAdapter(wordListAdapter);
+        Log.v("error_", "첫번째 selected");
     }
 
     public boolean isKorean(String str)

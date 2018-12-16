@@ -4,6 +4,7 @@ import android.os.Debug;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,12 +41,35 @@ public class MainActivity extends AppCompatActivity
 
         mViewPager = findViewById(R.id.vp_main_viewpager);
         mTabLayout = (TabLayout) findViewById(R.id.tab_main_layout);
+        mTabLayout.addOnTabSelectedListener(tabSelectedListener);
+
 
         setupViewPager();
         mTabLayout.setupWithViewPager(mViewPager);
 
 
     }
+
+    TabLayout.OnTabSelectedListener tabSelectedListener = new TabLayout.OnTabSelectedListener()
+    {
+        @Override
+        public void onTabSelected(TabLayout.Tab tab)
+        {
+            Log.v("error_", "스와이프!");
+        }
+
+        @Override
+        public void onTabUnselected(TabLayout.Tab tab)
+        {
+
+        }
+
+        @Override
+        public void onTabReselected(TabLayout.Tab tab)
+        {
+
+        }
+    };
 
     private void setupViewPager()
     {
