@@ -17,7 +17,7 @@ public class DBHelper extends SQLiteOpenHelper
     public final int MODE_IMPORTANCE = 1;
     public final int MODE_DATE = 2;
 
-    int orderMode = 1;
+    private int orderMode = 0;
 
     private Context context;
     public static DBHelper helper = null;
@@ -101,7 +101,7 @@ public class DBHelper extends SQLiteOpenHelper
         StringBuffer sb = new StringBuffer();
 
         if(orderMode == 0)
-            sb.append(" SELECT KOREAN, ENGLISH, STAR FROM WORDS ORDER BY LOWER(ENGLISH) DESC");
+            sb.append(" SELECT KOREAN, ENGLISH, STAR FROM WORDS ORDER BY LOWER(ENGLISH)");
         else if(orderMode == 1)
             sb.append(" SELECT KOREAN, ENGLISH, STAR FROM WORDS ORDER BY STAR DESC");
 
@@ -123,6 +123,11 @@ public class DBHelper extends SQLiteOpenHelper
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1)
     {
         Toast.makeText(context, "버전 변경이 감지되었습니다", Toast.LENGTH_LONG).show();
+    }
+
+    public void setMode(int mode)
+    {
+        orderMode = mode;
     }
 
 

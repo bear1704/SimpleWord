@@ -8,6 +8,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 import java.util.ArrayList;
 
@@ -23,6 +26,9 @@ public class WordListFragment extends Fragment
     ArrayList<Word> wordArrayList;
     WordListAdapter wordListAdapter = null;
     RecyclerView mRecyclerView;
+    Spinner listSpinner;
+    String[] spinnerItem;
+    ArrayAdapter<String> spinnerAdapter;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -39,16 +45,49 @@ public class WordListFragment extends Fragment
 
         mRecyclerView.setAdapter(wordListAdapter);
 
+        spinnerItem = new String[]{"알파벳 순으로 정렬", "중요도 순으로 정렬"};
+        spinnerAdapter = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item,
+                spinnerItem);
+        spinnerAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+
+        listSpinner = (Spinner) wordListView.findViewById(R.id.list_spinner);
+        listSpinner.setOnItemSelectedListener(spinnerListener);
+        listSpinner.setAdapter(spinnerAdapter);
         return wordListView;
     }
 
+    AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener()
+    {
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l)
+        {
+            if(position == 0)
+            {
+                dbHelper.setMode(0);
+                wordListAdapter.resetAdapter();
 
-    public void fragmentSelected()
+                Log.v("error_", "zero");
+            }
+            else if(position == 1)
+            {
+                dbHelper.setMode(1);
+                wordListAdapter.resetAdapter();
+                Log.v("error_", "one");
+            }
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView)
+        {
+
+        }
+    };
+
+
+    public void fragmentSelected() //프래그먼트가 보이는 상태일 때, db 초기화
     {
         super.onResume();
-        wordArrayList = dbHelper.getAllWordsData();
-        wordListAdapter = new WordListAdapter(wordArrayList, this.getContext());
-        mRecyclerView.setAdapter(wordListAdapter);
+        wordListAdapter.resetAdapter();
     }
 
 }
