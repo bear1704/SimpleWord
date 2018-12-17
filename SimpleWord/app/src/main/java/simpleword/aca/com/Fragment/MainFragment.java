@@ -119,7 +119,12 @@ public class MainFragment extends Fragment
         @Override
         public void onClick(View view)
         {
-            addWord(null);
+            if (inputEditText.getText().toString().equals(""))
+            { }
+            else
+            {
+                addWord(null);
+            }
         }
     };
 
@@ -181,6 +186,7 @@ public class MainFragment extends Fragment
         if(inputStr == null)
         {
             str = inputEditText.getText().toString();
+
         }
         else
         {

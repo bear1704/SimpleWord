@@ -105,16 +105,26 @@ public class MainActivity extends AppCompatActivity
        {
            //Toast.makeText(MainActivity.this, "리플라이 성공!", Toast.LENGTH_SHORT).show();
             String messageText = bundle.getString(KEY_TEXT_REPLY);
-            mainFragment.addWord(messageText);
 
-           NotificationCompat.Builder repliedNotification = new NotificationCompat.Builder(this, simpleword.aca.com.Notification.channelId)
-                   .setSmallIcon(R.drawable.ic_launcher_background)
-                   .setContentText("Replied");
+            if(messageText.equals(""))
+            {
 
-            NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
-            notificationManagerCompat.notify(Integer.parseInt(simpleword.aca.com.Notification.channelId), repliedNotification.build());
-            notificationManagerCompat.cancel(Integer.parseInt(channelId));
-            mainFragment.getNotification().Go();
+            }
+            else
+            {
+                mainFragment.addWord(messageText);
+
+                NotificationCompat.Builder repliedNotification = new NotificationCompat.Builder(this, simpleword.aca.com.Notification.channelId)
+                        .setSmallIcon(R.drawable.ic_launcher_background)
+                        .setContentText("Replied");
+
+                NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
+                notificationManagerCompat.notify(Integer.parseInt(simpleword.aca.com.Notification.channelId), repliedNotification.build());
+                notificationManagerCompat.cancel(Integer.parseInt(channelId));
+                mainFragment.getNotification().Go();
+            }
+
+
        }
    }
 
