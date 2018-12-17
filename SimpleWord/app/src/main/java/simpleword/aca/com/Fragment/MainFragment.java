@@ -214,7 +214,6 @@ public class MainFragment extends Fragment
 
     public void fragmentSelected()
     {
-        super.onResume();
         wordListAdapter.resetAdapter();
     }
 

@@ -141,11 +141,15 @@ public class MainActivity extends AppCompatActivity
                     {
                         case 0:
                             mainFragment.fragmentSelected();
+                            Log.d("error_", "0 selected");
                             break;
                         case 1:
                             wordListFragment.fragmentSelected();
+                            Log.d("error_", "1 selected");
                             break;
                         case 2:
+                            wordTestFragment.fragmentSelected();
+                            Log.d("error_", "2 selected");
                             break;
 
                     }
