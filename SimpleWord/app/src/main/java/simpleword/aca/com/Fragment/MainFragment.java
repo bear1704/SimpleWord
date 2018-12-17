@@ -25,6 +25,7 @@ import simpleword.aca.com.Adapter.WordListAdapter;
 import simpleword.aca.com.Db.DBHelper;
 import simpleword.aca.com.MainActivity;
 import simpleword.aca.com.Notification;
+import simpleword.aca.com.QuestionGenerator;
 import simpleword.aca.com.R;
 import simpleword.aca.com.Receiver.ScreenService;
 import simpleword.aca.com.Translator;
@@ -93,6 +94,23 @@ public class MainFragment extends Fragment
         mRecyclerView.setAdapter(wordListAdapter);
         mNotification = new Notification(getActivity().getApplicationContext());
         mNotification.Go();
+
+        //테스트 영역(제출시 삭제할것)
+        Button btn = (Button) wordListView.findViewById(R.id.btn_test);
+        btn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                QuestionGenerator qg = new QuestionGenerator(getActivity());
+                qg.PickWordFromDB(QuestionGenerator.PICK_BOTH);
+                Toast.makeText(getActivity(), qg.getRightAnswerKorStr(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), qg.getQuestionEngStr(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        //
+
         return wordListView;
     }
 

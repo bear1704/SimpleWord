@@ -100,9 +100,9 @@ public class DBHelper extends SQLiteOpenHelper
 
         StringBuffer sb = new StringBuffer();
 
-        if(orderMode == 0)
+        if(orderMode == MODE_ALPHABET)
             sb.append(" SELECT KOREAN, ENGLISH, STAR FROM WORDS ORDER BY LOWER(ENGLISH)");
-        else if(orderMode == 1)
+        else if(orderMode == MODE_IMPORTANCE)
             sb.append(" SELECT KOREAN, ENGLISH, STAR FROM WORDS ORDER BY STAR DESC");
 
         SQLiteDatabase db = getReadableDatabase();
