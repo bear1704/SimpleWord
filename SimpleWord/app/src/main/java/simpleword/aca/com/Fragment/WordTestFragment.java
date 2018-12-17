@@ -157,10 +157,18 @@ public class WordTestFragment extends Fragment
     };
     public void fragmentSelected()
     {
+
+        DBHelper db = DBHelper.getInstance(getActivity());
+        SQLiteDatabase sqdb = db.getReadableDatabase();
+        count = DatabaseUtils.queryNumEntries(sqdb,"WORDS");
+        db.close();
+        sqdb.close();
+
         if(count> 5)
         {
             Init(v);
         }
+
     }
 
 }

@@ -99,21 +99,7 @@ public class MainFragment extends Fragment
         mNotification = new Notification(getActivity().getApplicationContext());
         mNotification.Go();
 
-        //테스트 영역(제출시 삭제할것)
-        Button btn = (Button) wordListView.findViewById(R.id.btn_test);
-        btn.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                QuestionGenerator qg = new QuestionGenerator(getActivity());
-                qg.PickWordFromDB(QuestionGenerator.PICK_BOTH);
-                Toast.makeText(getActivity(), qg.getRightAnswerKorStr(), Toast.LENGTH_SHORT).show();
-                Toast.makeText(getActivity(), qg.getQuestionEngStr(), Toast.LENGTH_SHORT).show();
-            }
-        });
 
-        //
 
         return wordListView;
     }

@@ -46,11 +46,11 @@ public class Notification
 
 
           mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
-          mNotificationChannel = new NotificationChannel(channelId, "channel_name", NotificationManager.IMPORTANCE_HIGH);
+          mNotificationChannel = new NotificationChannel(channelId, "channel_name", NotificationManager.IMPORTANCE_LOW);
           mNotificationChannel.setDescription("channel description");
           mNotificationChannel.enableLights(true);
-          mNotificationChannel.enableVibration(true);
-          mNotificationChannel.setVibrationPattern(new long[]{100,200,100,200});
+          mNotificationChannel.enableVibration(false);
+          //mNotificationChannel.setVibrationPattern(new long[]{100,200,100,200});
           mNotificationChannel.setLockscreenVisibility(VISIBILITY_PUBLIC);
           mNotificationManager.createNotificationChannel(mNotificationChannel);
 

@@ -27,7 +27,7 @@
             android:text="단어장에 등록된 단어가 너무 적습니다"
             android:layout_gravity="center"
             android:textColor="@color/white"
-            android:layout_marginTop="100dp"/>
+            android:layout_marginTop="50dp"/>
 
 
         <LinearLayout
@@ -125,6 +125,7 @@
         android:visibility="gone"
         android:textSize="20sp"
         android:layout_gravity="center"
-        android:id="@+id/tv_test_result"/>
+        android:id="@+id/tv_test_result"
+        android:layout_margin="30dp"/>
 
 </LinearLayout>
