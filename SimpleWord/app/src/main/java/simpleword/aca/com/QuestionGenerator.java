@@ -49,9 +49,9 @@ public class QuestionGenerator
         {
             suggestionCandidateStr = PickWordFromDB(PICK_KOREAN); //하나 뽑아오기
 
-            if(!suggestionCandidateStr.equals(rightAnswerKorStr))
+            if(!(suggestionCandidateStr.equals(rightAnswerKorStr) || suggestion.contains(suggestionCandidateStr)))
             {
-                suggestion.add(suggestionCandidateStr); //제시문제와 답안후보의 값이 다르다면, 답안후보 등록
+                suggestion.add(suggestionCandidateStr); //제시문제와 답안후보의 값이 다르고, 원래 후보에도 없다면, 답안후보 등록
             }
 
         }
@@ -103,6 +103,7 @@ public class QuestionGenerator
             {
                 str = cursor.getString(0);
             }
+            cursor.close();
             return str;
         }
         else if(mode == PICK_ENGLISH)
@@ -115,6 +116,7 @@ public class QuestionGenerator
             {
                 str = cursor.getString(0);
             }
+            cursor.close();
             return str;
 
         }
@@ -129,6 +131,7 @@ public class QuestionGenerator
                 rightAnswerKorStr = cursor.getString(0);
                 questionEngStr = cursor.getString(1);
             }
+            cursor.close();
             return null;
         }
 

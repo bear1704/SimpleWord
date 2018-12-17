@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:textSize="50sp"
             android:id="@+id/tv_test_question_english_str"
-            android:text="English"
+            android:text="단어장에 등록된 단어가 너무 적습니다"
             android:layout_gravity="center"
             android:textColor="@color/white"
             android:layout_marginTop="100dp"/>

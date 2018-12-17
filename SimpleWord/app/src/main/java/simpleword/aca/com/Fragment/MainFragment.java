@@ -1,6 +1,7 @@
 package simpleword.aca.com.Fragment;
 
 import android.content.Intent;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ import simpleword.aca.com.Notification;
 import simpleword.aca.com.QuestionGenerator;
 import simpleword.aca.com.R;
 import simpleword.aca.com.Receiver.ScreenService;
+import simpleword.aca.com.RecyclerViewItemClickListener;
 import simpleword.aca.com.Translator;
 import simpleword.aca.com.Word;
 
@@ -81,11 +83,13 @@ public class MainFragment extends Fragment
 
         mRecyclerView = wordListView.findViewById(R.id.rv_wordlist);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mRecyclerView.addOnItemTouchListener(rvListener);
 
         //dbHelper = new DBHelper(this.getActivity(), "Word", null, 1);
         dbHelper = DBHelper.getInstance(getActivity().getApplicationContext());
 
         //dbHelper.clearWord();
+        //dbHelper.deleteWord("과자");
         wordArrayList = dbHelper.getAllWordsData();
 
         wordListAdapter = new WordListAdapter(wordArrayList, this.getContext());
@@ -114,6 +118,7 @@ public class MainFragment extends Fragment
         return wordListView;
     }
 
+
     View.OnClickListener inputButtonListener = new View.OnClickListener()
     {
         @Override
@@ -127,6 +132,16 @@ public class MainFragment extends Fragment
             }
         }
     };
+
+    RecyclerViewItemClickListener rvListener = new RecyclerViewItemClickListener(getActivity(), new RecyclerViewItemClickListener.OnItemClickListener()
+    {
+        @Override
+        public void onItemClick(View view, int position)
+        {
+            wordArrayList = dbHelper.getAllWordsData();
+            wordListAdapter.removeItem(wordArrayList.get(position).getKoreanStr());
+        }
+    });
 
     View.OnClickListener starButtonListener = new View.OnClickListener()
     {
@@ -212,6 +227,7 @@ public class MainFragment extends Fragment
         }
     }
 
+
     public void fragmentSelected()
     {
         wordListAdapter.resetAdapter();
@@ -234,9 +250,22 @@ public class MainFragment extends Fragment
         {
             if(isToggle)
             {
-                Intent lockScreenIntent = new Intent(getActivity(), ScreenService.class);
-                getActivity().startService(lockScreenIntent);
-                isToggle = false;
+                DBHelper db = DBHelper.getInstance(getActivity());
+                SQLiteDatabase sqdb = db.getReadableDatabase();
+                long count = DatabaseUtils.queryNumEntries(sqdb,"WORDS");
+                db.close();
+                sqdb.close();
+
+                if(count > 5)
+                {
+                    Intent lockScreenIntent = new Intent(getActivity(), ScreenService.class);
+                    getActivity().startService(lockScreenIntent);
+                    isToggle = false;
+                }
+                else
+                {
+                    Toast.makeText(getActivity(), "등록된 단어 수가 너무 적습니다!", Toast.LENGTH_SHORT).show();
+                }
             }
             else
             {

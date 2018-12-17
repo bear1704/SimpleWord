@@ -1,5 +1,7 @@
 package simpleword.aca.com.Fragment;
 
+import android.database.DatabaseUtils;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import simpleword.aca.com.Db.DBHelper;
 import simpleword.aca.com.LockScreenActivity;
 import simpleword.aca.com.QuestionGenerator;
 import simpleword.aca.com.R;
@@ -36,7 +39,7 @@ public class WordTestFragment extends Fragment
     private int currentQuestion = 1;
     private int maxQuestion = 20;
     private int currentPoint = 0;
-
+    private long count;
     private View v;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -45,7 +48,17 @@ public class WordTestFragment extends Fragment
 
         v = wordTestView;
 
-        Init(wordTestView);
+        DBHelper db = DBHelper.getInstance(getActivity());
+        SQLiteDatabase sqdb = db.getReadableDatabase();
+        count = DatabaseUtils.queryNumEntries(sqdb,"WORDS");
+        db.close();
+        sqdb.close();
+
+
+        if(count > 5)
+        {
+            Init(wordTestView);
+        }
 
         return wordTestView;
     }
@@ -144,7 +157,10 @@ public class WordTestFragment extends Fragment
     };
     public void fragmentSelected()
     {
-       Init(v);
+        if(count> 5)
+        {
+            Init(v);
+        }
     }
 
 }

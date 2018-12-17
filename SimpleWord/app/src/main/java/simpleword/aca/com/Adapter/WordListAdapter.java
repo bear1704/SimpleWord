@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,6 +62,8 @@ public class WordListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         holder.tvEnglish.setText(word.getEnglishStr());
         holder.checkBox.setChecked(word.isChecked());
 
+        Log.d("error_", "bind요");
+
     }
 
     public void addItem(Word word)
@@ -70,9 +73,11 @@ public class WordListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         notifyDataSetChanged();
     }
 
-    public void removeItem(Word word)
+    public void removeItem(String str)
     {
-
+        dbHelper.deleteWord(str);
+        wordArrayList = dbHelper.getAllWordsData();
+        notifyDataSetChanged();
     }
 
     @Override
@@ -162,7 +167,6 @@ public class WordListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             tvEnglish = v.findViewById(R.id.tv_worditem_english);
             tvKorean = v.findViewById(R.id.tv_worditem_korean);
             checkBox = v.findViewById(R.id.word_checkbox);
-
 
         }
 

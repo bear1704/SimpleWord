@@ -89,8 +89,7 @@ public class DBHelper extends SQLiteOpenHelper
     public void deleteWord(String str)
     {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM WORDS WHERE KOREAN=" + str);
-
+        db.execSQL("DELETE FROM WORDS WHERE KOREAN= \"" + str + "\"");
     }
 
     public ArrayList<Word> getAllWordsData()
@@ -114,7 +113,7 @@ public class DBHelper extends SQLiteOpenHelper
             words.add(word);
 
         }
-
+        cursor.close();
         return words;
 
     }

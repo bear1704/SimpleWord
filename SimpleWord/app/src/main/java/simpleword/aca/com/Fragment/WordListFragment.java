@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import simpleword.aca.com.Adapter.WordListAdapter;
 import simpleword.aca.com.Db.DBHelper;
 import simpleword.aca.com.R;
+import simpleword.aca.com.RecyclerViewItemClickListener;
 import simpleword.aca.com.Word;
 
 public class WordListFragment extends Fragment
@@ -44,6 +45,7 @@ public class WordListFragment extends Fragment
         wordListAdapter = new WordListAdapter(wordArrayList, this.getContext());
 
         mRecyclerView.setAdapter(wordListAdapter);
+        mRecyclerView.addOnItemTouchListener(rvListener);
 
         spinnerItem = new String[]{"알파벳 순으로 정렬", "중요도 순으로 정렬"};
         spinnerAdapter = new ArrayAdapter<String>(getActivity(), R.layout.support_simple_spinner_dropdown_item,
@@ -55,6 +57,12 @@ public class WordListFragment extends Fragment
         listSpinner.setAdapter(spinnerAdapter);
         return wordListView;
     }
+
+    public void deleteWord(String str)
+    {
+
+    }
+
 
     AdapterView.OnItemSelectedListener spinnerListener = new AdapterView.OnItemSelectedListener()
     {
@@ -82,6 +90,16 @@ public class WordListFragment extends Fragment
 
         }
     };
+
+    RecyclerViewItemClickListener rvListener = new RecyclerViewItemClickListener(getActivity(), new RecyclerViewItemClickListener.OnItemClickListener()
+    {
+        @Override
+        public void onItemClick(View view, int position)
+        {
+            wordArrayList = dbHelper.getAllWordsData();
+            wordListAdapter.removeItem(wordArrayList.get(position).getKoreanStr());
+        }
+    });
 
 
     public void fragmentSelected() //프래그먼트가 보이는 상태일 때, db 초기화
