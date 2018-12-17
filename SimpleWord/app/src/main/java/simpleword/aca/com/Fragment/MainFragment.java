@@ -23,6 +23,7 @@ import java.util.regex.Pattern;
 import simpleword.aca.com.Adapter.WordListAdapter;
 import simpleword.aca.com.Db.DBHelper;
 import simpleword.aca.com.MainActivity;
+import simpleword.aca.com.Notification;
 import simpleword.aca.com.R;
 import simpleword.aca.com.Translator;
 import simpleword.aca.com.Word;
@@ -41,6 +42,7 @@ public class MainFragment extends Fragment
     int starCount = 1; //입력 전 선택한 별 카운트
     WordListAdapter wordListAdapter = null;
     WordListAdapter wordListFragmentListAdapter = null;
+    private Notification mNotification;
 
     Button inputButton;
 
@@ -82,9 +84,8 @@ public class MainFragment extends Fragment
 
 
         mRecyclerView.setAdapter(wordListAdapter);
-
-
-
+        mNotification = new Notification(getActivity().getApplicationContext());
+        mNotification.Go();
         return wordListView;
     }
 
@@ -93,7 +94,7 @@ public class MainFragment extends Fragment
         @Override
         public void onClick(View view)
         {
-            addWord();
+            addWord(null);
         }
     };
 
@@ -149,11 +150,21 @@ public class MainFragment extends Fragment
         }
     };
 
-    public void addWord()
+    public void addWord(String inputStr)
     {
+        String str = null;
+        if(inputStr == null)
+        {
+            str = inputEditText.getText().toString();
+        }
+        else
+        {
+            str = inputStr;
+            starCount = 5;
+        }
 
-        String str = inputEditText.getText().toString();
         Word word;
+
         if(isKorean(str))
         {
             String koToEngStr = translator.Translate(str, translator.KO_TO_EN);
@@ -181,5 +192,9 @@ public class MainFragment extends Fragment
         return Pattern.matches("^[ㄱ-ㅎ가-힣]*$", str);
     }
 
+    public Notification getNotification()
+    {
+        return mNotification;
+    }
 }
 
