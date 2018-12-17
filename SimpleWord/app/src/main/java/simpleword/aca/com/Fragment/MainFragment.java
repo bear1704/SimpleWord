@@ -1,5 +1,6 @@
 package simpleword.aca.com.Fragment;
 
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import simpleword.aca.com.Db.DBHelper;
 import simpleword.aca.com.MainActivity;
 import simpleword.aca.com.Notification;
 import simpleword.aca.com.R;
+import simpleword.aca.com.Receiver.ScreenService;
 import simpleword.aca.com.Translator;
 import simpleword.aca.com.Word;
 
@@ -43,6 +45,8 @@ public class MainFragment extends Fragment
     WordListAdapter wordListAdapter = null;
     WordListAdapter wordListFragmentListAdapter = null;
     private Notification mNotification;
+    private boolean isToggle = true;
+    Button screenToggleButton;
 
     Button inputButton;
 
@@ -71,6 +75,9 @@ public class MainFragment extends Fragment
         inputEditText = (EditText) wordListView.findViewById(R.id.edt_main_word);
         inputButton = (Button) wordListView.findViewById(R.id.btn_inputText);
         inputButton.setOnClickListener(inputButtonListener);
+        screenToggleButton = (Button) wordListView.findViewById(R.id.btn_lock_screen);
+        screenToggleButton.setOnClickListener(screenToggle);
+
         mRecyclerView = wordListView.findViewById(R.id.rv_wordlist);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -196,5 +203,27 @@ public class MainFragment extends Fragment
     {
         return mNotification;
     }
+
+    private View.OnClickListener screenToggle = new View.OnClickListener()
+    {
+        @Override
+        public void onClick(View view)
+        {
+            if(isToggle)
+            {
+                Intent lockScreenIntent = new Intent(getActivity(), ScreenService.class);
+                getActivity().startService(lockScreenIntent);
+                isToggle = false;
+            }
+            else
+            {
+                Intent lockScreenIntent = new Intent(getActivity(), ScreenService.class);
+                getActivity().stopService(lockScreenIntent);
+                isToggle = true;
+            }
+
+        }
+    };
+
 }
 

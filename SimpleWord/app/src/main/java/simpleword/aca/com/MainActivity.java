@@ -17,6 +17,8 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +31,7 @@ import simpleword.aca.com.Db.DBHelper;
 import simpleword.aca.com.Fragment.MainFragment;
 import simpleword.aca.com.Fragment.WordListFragment;
 import simpleword.aca.com.Fragment.WordTestFragment;
+import simpleword.aca.com.Receiver.ScreenService;
 
 import static simpleword.aca.com.Notification.KEY_TEXT_REPLY;
 import static simpleword.aca.com.Notification.channelId;
@@ -43,10 +46,13 @@ public class MainActivity extends AppCompatActivity
     private ViewPagerAdapter mPageAdapter;
     private TabLayout mTabLayout;
 
+
     MainFragment mainFragment;
     WordListFragment wordListFragment;
     WordTestFragment wordTestFragment;
     DBHelper dbHelper;
+
+
     private simpleword.aca.com.Notification mNotification;
 
     boolean isStart = false;
@@ -59,6 +65,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         //tv_transResult = findViewById(R.id.text1);
         tl = new Translator();
+
 
         mainFragment = new MainFragment();
         wordListFragment = new WordListFragment();
@@ -108,7 +115,6 @@ public class MainActivity extends AppCompatActivity
             notificationManagerCompat.notify(Integer.parseInt(simpleword.aca.com.Notification.channelId), repliedNotification.build());
             notificationManagerCompat.cancel(Integer.parseInt(channelId));
             mainFragment.getNotification().Go();
-
        }
    }
 
@@ -160,6 +166,7 @@ public class MainActivity extends AppCompatActivity
 
 
     }
+
 
 
 }
